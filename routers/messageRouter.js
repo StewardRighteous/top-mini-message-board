@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const messages = require("../db");
+const { messages, addToMessages, getMessage } = require("../db");
 
 const messageRouter = Router();
 
@@ -15,12 +15,14 @@ messageRouter
   .post((req, res) => {
     const userName = req.body.user;
     const textMessage = req.body.text;
-    messages.push({
-      user: userName,
-      text: textMessage,
-      added: new Date().toLocaleString(),
-    });
+    addToMessages(userName, textMessage, new Date().toLocaleString());
     res.redirect("/");
   });
+
+messageRouter.get("/detail{s}", (req, res) => {
+  const message = getMessage(req.query.id);
+  console.log(message);
+  res.render("details", { message: message.at(0) });
+});
 
 module.exports = messageRouter;
