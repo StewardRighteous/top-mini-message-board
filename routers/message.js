@@ -8,7 +8,7 @@ messageRouter.get("/", (req, res) => {
 });
 
 messageRouter.get("/new", (req, res) => {
-  res.send("New Message Page");
+  res.render("form");
 });
 
 module.exports = messageRouter;
