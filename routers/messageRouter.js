@@ -18,7 +18,7 @@ messageRouter
     messages.push({
       user: userName,
       text: textMessage,
-      date: new Date().toLocaleString(),
+      added: new Date().toLocaleString(),
     });
     res.redirect("/");
   });
