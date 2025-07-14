@@ -7,8 +7,20 @@ messageRouter.get("/", (req, res) => {
   res.render("index", { title: "Mini Message Board", messages: messages });
 });
 
-messageRouter.get("/new", (req, res) => {
-  res.render("form");
-});
+messageRouter
+  .route("/new")
+  .get((req, res) => {
+    res.render("form");
+  })
+  .post((req, res) => {
+    const userName = req.body.user;
+    const textMessage = req.body.text;
+    messages.push({
+      user: userName,
+      text: textMessage,
+      date: new Date().toLocaleString(),
+    });
+    res.redirect("/");
+  });
 
 module.exports = messageRouter;
