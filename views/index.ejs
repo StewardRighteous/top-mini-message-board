@@ -1,8 +1,37 @@
 <html>
   <head>
-    <title>Message Board</title>
+    <title><%= title %></title>
+    <style>
+      body {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100vw;
+        align-content: flex-start;
+      }
+      .message {
+        display: flex;
+        gap: 8px;
+        border: 2px solid black;
+        margin: 8px;
+        padding: 8px;
+        max-width: fit-content;
+        height: fit-content;
+      }
+      .message .user {
+        font-weight: bold;
+      }
+      .message .time {
+        text-decoration: solid;
+      }
+    </style>
   </head>
   <body>
-    Index Page
+    <%messages.forEach(message => { %>
+    <div class="message">
+      <p class="user"><%= message.user %>:</p>
+      <p class="text"><%= message.text %> ||</p>
+      <p class="time"><%= message.added %></p>
+    </div>
+    <% } ) %>
   </body>
 </html>
