@@ -1,4 +1,4 @@
-const { pool } = require("./pool");
+const pool = require("./pool");
 
 async function addToMessages(user, text, added) {
   await pool.query(
@@ -8,12 +8,14 @@ async function addToMessages(user, text, added) {
 }
 
 async function getMessageId(id) {
-  const { rows } = pool.query("SELECT * FROM messages WHERE id = $1", [id]);
+  const { rows } = await pool.query("SELECT * FROM messages WHERE id = $1", [
+    id,
+  ]);
   return rows;
 }
 
 async function getAllMessages() {
-  const { rows } = pool.query("SELECT * FROM messages ");
+  const { rows } = await pool.query("SELECT * FROM messages ");
   return rows;
 }
 
