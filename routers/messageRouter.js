@@ -1,28 +1,17 @@
 const { Router } = require("express");
-const { messages, addToMessages, getMessage } = require("../db");
+const {
+  getMessageGet,
+  getAddNewFormGet,
+  createNewMessagePost,
+  getMessageDetailsGet,
+} = require("../controllers/messageController");
 
 const messageRouter = Router();
 
-messageRouter.get("/", (req, res) => {
-  res.render("index", { title: "Mini Message Board", messages: messages });
-});
+messageRouter.get("/", getMessageGet);
 
-messageRouter
-  .route("/new")
-  .get((req, res) => {
-    res.render("form");
-  })
-  .post((req, res) => {
-    const userName = req.body.user;
-    const textMessage = req.body.text;
-    addToMessages(userName, textMessage, new Date().toLocaleString());
-    res.redirect("/");
-  });
+messageRouter.route("/new").get(getAddNewFormGet).post(createNewMessagePost);
 
-messageRouter.get("/detail{s}", (req, res) => {
-  const message = getMessage(req.query.id);
-  console.log(message);
-  res.render("details", { message: message.at(0) });
-});
+messageRouter.get("/detail{s}", getMessageDetailsGet);
 
 module.exports = messageRouter;
