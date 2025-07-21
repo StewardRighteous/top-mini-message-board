@@ -16,14 +16,13 @@ function getAddNewFormGet(req, res) {
 async function createNewMessagePost(req, res) {
   const userName = req.body.user;
   const textMessage = req.body.text;
-  await addToMessages(userName, textMessage, new Date().toLocaleString());
+  await addToMessages(userName, textMessage, new Date());
   res.redirect("/");
 }
 
 async function getMessageDetailsGet(req, res) {
   const message = await getMessageId(req.query.id);
-  console.log(message);
-  res.render("details", { message: message });
+  res.render("details", { message: message.at(0) });
 }
 
 module.exports = {

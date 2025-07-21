@@ -1,43 +1,49 @@
 <html>
-  <head>
-    <title><%= title %></title>
-    <style>
-      body {
-        display: flex;
-        flex-flow: row wrap;
-        width: 100vw;
-        align-content: flex-start;
-        position: relative;
-      }
-      .message {
-        display: flex;
-        gap: 8px;
-        border: 2px solid black;
-        margin: 8px;
-        padding: 8px;
-        max-width: fit-content;
-        height: fit-content;
-      }
-      .message .user {
-        font-weight: bold;
-      }
-      .message .time {
-        text-decoration: solid;
-      }
-    </style>
-  </head>
-  <body>
-    <%messages.forEach(message => { %>
-    <div class="message">
-      <p class="user"><%= message.user %>:</p>
-      <p class="text"><%= message.text %> ||</p>
-      <p class="time"><%= message.added %></p>
-      <% const detailsPath = `/details?id=${message.id}` %>
-      <p><a href= <%= detailsPath %>>open</a></p>
-    </div>
-    <% } ) %>
-    <footer>
-      <a href="/new"> Add New Message</a>
-    </footer>
-  </body>
+
+<head>
+  <title><%= title %></title>
+  <style>
+    body {
+      display: flex;
+      flex-flow: row wrap;
+      width: 100vw;
+      align-content: flex-start;
+      position: relative;
+    }
+
+    .message {
+      display: flex;
+      gap: 8px;
+      border: 2px solid black;
+      margin: 8px;
+      padding: 8px;
+      max-width: fit-content;
+      height: fit-content;
+    }
+
+    .message .user {
+      font-weight: bold;
+    }
+
+    .message .time {
+      text-decoration: solid;
+    }
+  </style>
+</head>
+
+<body>
+  <%messages.forEach(message => { %>
+  <div class="message">
+    <p class="user"><%= message.username %>:</p>
+    <p class="text"><%= message.text %> ||</p>
+    <p class="time"><%= message.added %></p>
+    <% const detailsPath = `/details?id=${message.id}` %>
+    <p><a href=<%= detailsPath %>>open</a></p>
+  </div>
+  <% } ) %>
+  <footer>
+    <a href="/new"> Add New Message</a>
+  </footer>
+</body>
+
 </html>
